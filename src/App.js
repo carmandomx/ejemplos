@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Topics from "./components/Topics";
+import Layout from "./components/Layout";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+          <Route
+            render={({ match }) => (
+              <Layout>
+                {" "}
+                <p>Esta es mi ruta Home {match.url}</p>
+              </Layout>
+            )}
+            exact
+            path="/"
+          />
+          <Route path="/about">
+            <Layout>Este es About y quiero ver mi ruta</Layout>
+          </Route>
+          <Route path="/login">
+            Hola invitado(a) porfavor inicia sesion
+            <button>Inicia sesion</button>
+          </Route>
+          <Route path="/topics" component={Topics} />
+
+          <Route path="*">Alto ahi loka</Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
